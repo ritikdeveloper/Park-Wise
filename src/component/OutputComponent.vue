@@ -1,16 +1,16 @@
 <template>
   <ul class="output-list">
-    <li>Car brand is {{ Brand }}</li>
-    <li>Car model is {{ Model }}</li>
-    <li>Car color is {{ Color }}</li>
-    <li>Car numberplate is {{ Numberplate }}</li>
-    <li>Owner's address is {{ Towerno }} {{ Flatno }}</li>
+    <li>Car brand is {{ brand }}</li>
+    <li>Car model is {{ model }}</li>
+    <!-- <li>Car color is {{ Color }}</li> -->
+    <li>Car numberplate is {{ numberplate }}</li>
+    <!-- <li>Owner's address is {{ Towerno }} {{ Flatno }}</li> -->
   </ul>
 </template>
 
 <script>
 export default {
-  props: ['Brand', 'Model', 'Color', 'Numberplate', 'Towerno', 'Flatno'],
+  props: ['brand', 'model',  'numberplate'],
 };
 </script>
 

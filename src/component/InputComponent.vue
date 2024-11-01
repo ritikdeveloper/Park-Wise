@@ -1,22 +1,22 @@
 <template>
   <form @submit.prevent="validate" class="input-form">
     <label>Car Company</label>
-    <input placeholder="Enter Company Name" v-model="Brand" />
+    <input placeholder="Enter Company Name" v-model="brand" />
     
     <label>Car Model</label>
-    <input placeholder="Enter Car Model" v-model="Model" />
+    <input placeholder="Enter Car Model" v-model="model" />
     
-    <label>Car Color</label>
-    <input placeholder="Enter Car Color" v-model="Color" />
+    <!-- <label>Car Color</label>
+    <input placeholder="Enter Car Color" v-model="Color" /> -->
     
     <label>Car's Numberplate</label>
-    <input placeholder="Enter Numberplate" v-model="Numberplate" />
+    <input placeholder="Enter Numberplate" v-model="numberplate" />
     
-    <label>Owner's Tower No</label>
-    <input placeholder="Enter Tower No" v-model="Towerno" />
-    
+    <!-- <label>Owner's Tower No</label>
+    <input placeholder="Enter Tower No" v-model="Towerno" /> -->
+<!--     
     <label>Owner's Flat No</label>
-    <input placeholder="Enter Flat No" v-model="Flatno" />
+    <input placeholder="Enter Flat No" v-model="Flatno" /> -->
     
     <div class="button-container">
       <button type="submit">Save Data</button>
@@ -29,34 +29,34 @@
 export default {
   data() {
     return {
-      Brand: null,
-      Model: null,
-      Color: null,
-      Numberplate: null,
-      Towerno: null,
-      Flatno: null,
+      brand: null,
+      model: null,
+      // Color: null,
+      numberplate: null,
+      // Towerno: null,
+      // Flatno: null,
       validates: true,
     };
   },
   methods: {
     submitForm() {
       this.$emit('car-selected', {
-        Brand: this.Brand,
-        Model: this.Model,
-        Color: this.Color,
-        Numberplate: this.Numberplate,
-        Towerno: this.Towerno,
-        Flatno: this.Flatno,
+        brand: this.brand,
+        model: this.model,
+        // Color: this.Color,
+        numberplate: this.numberplate,
+        // Towerno: this.Towerno,
+        // Flatno: this.Flatno,
       });
     },
     validate() {
       if (
-        !this.Brand ||
-        !this.Model ||
-        !this.Color ||
-        !this.Numberplate ||
-        !this.Towerno ||
-        !this.Flatno
+        !this.brand ||
+        !this.model ||
+        // !this.Color ||
+        !this.numberplate 
+        // !this.Towerno ||
+        // !this.Flatno
       ) {
         this.validates = false;
       } else {

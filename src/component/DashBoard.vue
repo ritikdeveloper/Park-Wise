@@ -1,16 +1,13 @@
 <template>
   <section class="dashboard">
-    <input-component @car-selected="addcar"></input-component>
+    <input-component @car-selected="addCar"></input-component>
     <div class="output-container">
-      <OutputComponent
+      <output-component
         v-for="car in cars"
-        :key="car.Numberplate"
-        :Brand="car.Brand"
-        :Model="car.Model"
-        :Color="car.Color" 
-        :Numberplate="car.Numberplate"
-        :Towerno="car.Towerno"
-        :Flatno="car.Flatno"
+        :key="car.numberplate"
+        :brand="car.brand"
+        :model="car.model"
+        :numberplate="car.numberplate"
       />
     </div>
   </section>
@@ -19,6 +16,9 @@
 <script>
 import InputComponent from './InputComponent.vue';
 import OutputComponent from './OutputComponent.vue';
+import axios from 'axios';
+axios.defaults.baseURL = '//localhost:8080/';
+
 
 export default {
   components: {
@@ -27,32 +27,37 @@ export default {
   },
   data() {
     return {
-      cars: [
-        {
-          Brand: 'Maruti',
-          Model: 'Baleno',
-          Color: 'Orange',
-          Numberplate: 'HR36ABxxxx',
-          Towerno: 'M-7',
-          Flatno: 628
-        },
-        {
-          Brand: 'Hyundai',
-          Model: 'Creta',
-          Color: 'White',
-          Numberplate: 'HR26ADxxxx',
-          Towerno: 'M-9',
-          Flatno: 986
-        }
-      ]
+      cars: []
     };
   },
-
-  methods:{
-    addcar(car){
-        console.log(car);
-        this.cars.push(car);
+  methods: {
+    async fetchCars() {
+      try {
+        const response = await axios.get('/api');
+        this.cars = response.data;
+      } catch (error) {
+        console.error('Error fetching cars:', error);
+      }
+    },
+    async addCar(carData) {
+      try {
+        const response = await axios.post('/api', carData);
+        this.cars.push(response.data); 
+      } catch (error) {
+        console.error('Error adding car:', error);
+      }
+    },
+    addcar(car) {
+      console.log(car);
+      if (!this.cars.some(existingCar => existingCar.Numberplate === car.Numberplate)) {
+        this.addCar(car);
+      } else {
+        console.log('Car with this Numberplate already exists');
+      }
     }
+  },
+  mounted() {
+    this.fetchCars();  // Fetch cars when the component is mounted
   }
 };
 </script>
